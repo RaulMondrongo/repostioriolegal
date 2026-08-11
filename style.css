@@ -65,11 +65,36 @@ body {
 .bolha-2 {
     width: 90px;
     height: 90px;
-    bottom: 14%;
-    right: 12%;
+    bottom: 13%;
+    right: 13%;
 }
 
+.bolha-3 {
+    width: 125px;
+    height: 125px;
+    top: 27%;
+    right: 3%;
+}
 
+.bolha-4 {
+    width: 95px;
+    height: 95px;
+    bottom: 27%;
+    left: 3%;
+}
+
+.bolha-5 {
+    width: 75px;
+    height: 75px;
+    top: 4%;
+    right: 30%;
+}
+.bolha-6 {
+    width: 120px;
+    height: 120px;
+    bottom: 30%;
+    cursor: 4%;
+}
 
 /* --- CONTAINER PRINCIPAL (JANELA AERO GLASS) --- */
 .conteudo-principal {
