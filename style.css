@@ -46,60 +46,164 @@ body {
     overflow: hidden;
 }
 
-/* --- BOLHAS DE ÁGUA DE FUNDO --- */
-.bolha {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0.4) 100%);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+/* --- IMAGEM DE FUNDO INTERATIVA (ASADAL.JPG) --- */
+.bg-imagem {
+    position: fixed;
+    top: -5%;
+    left: -5%;
+    width: 110vw;
+    height: 110vh;
+    background-image: url('asadal.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -2; /* Fica atrás das bolhas e do conteúdo */
+    transition: transform 0.1s ease-out; /* Transição suave */
     pointer-events: none;
 }
 
-.bolha-1 {
-    width: 140px;
-    height: 140px;
-    top: 8%;
-    left: 10%;
+/* --- CONTAINER INDIVIDUAL DE CADA MENU --- */
+.menu-item {
+    position: relative;
+    width: 100%;
 }
 
-.bolha-2 {
-    width: 90px;
-    height: 90px;
-    bottom: 13%;
-    right: 13%;
+/* --- ABA DE SUB-MENU (GLASSMORPHISM) --- */
+.sub-menu {
+    position: relative;
+    width: 100%;
+    
+    /* Layout dos sub-botões */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    margin-top: 8px;
+    
+    /* Estilo Vidro Aero */
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid var(--card-borda);
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 40, 80, 0.15);
+
+    /* Oculto por padrão */
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    overflow: hidden;
+    pointer-events: none;
+
+    /* Animação suave de abertura */
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bolha-3 {
-    width: 125px;
-    height: 125px;
-    top: 27%;
-    right: 3%;
+/* --- REVELA A ABA AO PASSAR O MOUSE --- */
+.menu-item:hover .sub-menu {
+    opacity: 1;
+    max-height: 300px; /* Ajuste se tiver muitos botões */
+    padding: 12px;
+    margin-top: 8px;
+    pointer-events: auto;
 }
 
-.bolha-4 {
-    width: 95px;
-    height: 95px;
-    bottom: 27%;
-    left: 3%;
+/* --- SUB-BOTÕES GLOSSY AERO --- */
+.sub-botao {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+    
+    /* Gradiente Brilhante (Glossy Mid-split) */
+    background: linear-gradient(180deg, 
+        #82dbff 0%, 
+        #19a7eb 48%, 
+        #008bd3 50%, 
+        #1db6fa 100%
+    );
+    border: 1px solid #006da8;
+    border-radius: 10px;
+    
+    padding: 10px 16px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    
+    /* Efeito de Vidro e Relevo (Highlights Frutiger Aero) */
+    box-shadow: 
+        0 3px 6px rgba(0, 30, 60, 0.2),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+        
+    transition: all 0.2s ease;
 }
 
-.bolha-5 {
-    width: 75px;
-    height: 75px;
-    top: 4%;
-    right: 30%;
+/* Hover: ilumina o botão e dá o efeito de slide pra direita */
+.sub-botao:hover {
+    background: linear-gradient(180deg, 
+        #a3e5ff 0%, 
+        #3bbbfb 48%, 
+        #0f9ee6 50%, 
+        #3bc6ff 100%
+    );
+    border-color: #0081c7;
+    transform: translateX(6px);
+    box-shadow: 
+        0 4px 12px rgba(0, 162, 237, 0.35),
+        inset 0 1px 3px rgba(255, 255, 255, 1);
 }
-.bolha-6 {
-    width: 120px;
-    height: 120px;
-    bottom: 30%;
-    cursor: 4%;
+
+/* Efeito de clique (afunda levemente) */
+.sub-botao:active {
+    transform: translateX(3px) translateY(1px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+/* --- BOLHAS INTERATIVAS DE FUNDO --- */
+.bolha {
+    position: fixed;
+    bottom: -150px; /* Inicia abaixo da tela */
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.4) 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    pointer-events: auto; /* Permite clicar na bolha */
+    cursor: pointer;
+    z-index: -1;
+    user-select: none;
+    transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+}
+
+/* Efeito de estouro ao clicar */
+.bolha.estourando {
+    transform: scale(1.6) !important;
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+/* Animação de subida contínua */
+@keyframes subir {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.85;
+    }
+    90% {
+        opacity: 0.85;
+    }
+    100% {
+        transform: translateY(-125vh);
+        opacity: 0;
+    }
 }
 
 /* --- CONTAINER PRINCIPAL (JANELA AERO GLASS) --- */
 .conteudo-principal {
     display: flex;
-    flex-direction: row;
+    flex-direction: column; /* Corrigido: era "left" */
     justify-content: center;
     align-items: center;
     max-width: 750px;
@@ -119,7 +223,7 @@ body {
 }
 
 .titulo-principal {
-    text-align: center;
+    text-align: center; /* Corrigido: era "flex" */
     width: 100%;
     font-size: 26px;
     font-weight: 700;
@@ -160,6 +264,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.15),
@@ -167,6 +272,13 @@ body {
         inset 0 -1px 2px rgba(0, 0, 0, 0.2);
     
     transition: all 0.2s ease;
+}
+
+.icone-botao {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 .botao:hover {
