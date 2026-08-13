@@ -5,67 +5,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus objetivos do ano</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%237fd5ff'/%3E%3Cstop offset='50%25' stop-color='%2300a2ed'/%3E%3Cstop offset='100%25' stop-color='%2300a8f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='28' fill='url(%23g)' stroke='%23005f96' stroke-width='2'/%3E%3Ccircle cx='24' cy='22' r='8' fill='white' opacity='0.5'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="bg-imagem"></div>
-
-    <section class="conteudo-principal">
-        <h2 class="titulo-principal">Meu portfolio<span>_</span></h2>
-        
-        <div class="botoes">
-
-            <div class="menu-item">
-                <button class="botao">
-                    <img src="user1.png" alt="Ícone Quem Sou" class="icone-botao">
-                    <span>Quem sou</span>
-                </button>
-                <div class="sub-menu">
-                    <button class="sub-botao">Bio & Sobre</button>
-                    <button class="sub-botao">Minhas Habilidades</button>
-                    <button class="sub-botao">Hobbies</button>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <button class="botao">
-                    <img src="flower.png" alt="Ícone Minhas Experiencias" class="icone-botao">
-                    <span>Minhas experiências</span>
-                </button>
-                <div class="sub-menu">
-                    <button class="sub-botao">Projetos Web</button>
-                    <button class="sub-botao">Design Frutiger</button>
-                    <button class="sub-botao">Freelances</button>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <button class="botao">
-                    <img src="flower2.png" alt="Ícone Minha carreira" class="icone-botao">
-                    <span>Minha carreira</span>
-                </button>
-                <div class="sub-menu">
-                    <button class="sub-botao">Formação Acadêmica</button>
-                    <button class="sub-botao">Certificados</button>
-                    <button class="sub-botao">Metas Futuras</button>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <button class="botao">
-                    <img src="clover.png" alt="Ícone Minhas Redes" class="icone-botao">
-                    <span>Minhas redes</span>
-                </button>
-                <div class="sub-menu">
-                    <button class="sub-botao">GitHub</button>
-                    <button class="sub-botao">LinkedIn</button>
-                    <button class="sub-botao">Instagram</button>
-                </div>
-            </div>
-
+    <!-- ================= TELA DE CARREGAMENTO (SPLASH) ================= -->
+    <div class="tela-splash" id="tela-splash">
+        <h1 class="splash-titulo">Meu portfolio<span>_</span></h1>
+        <div class="splash-barra">
+            <div class="splash-barra-preenchimento" id="splash-preenchimento"></div>
         </div>
-    </section>
+    </div>
+
+    <!-- Fundo do site -->
+    <div class="bg-imagem" style="background-image:url('asadal.jpg')"></div>
+
+    <!-- ================= WIDGET DE RELÓGIO (estilo Sidebar Gadget) ================= -->
+    <div class="widget-relogio">
+        <div class="widget-hora" id="widget-hora">--:--</div>
+        <div class="widget-data" id="widget-data">-- de -- --</div>
+    </div>
+
+    <!-- Palco onde as janelas deslizam. Tudo que é "janela" fica dentro. -->
+    <div class="palco-wrap">
+    <div class="palco">
+
+        <!-- ================= JANELA PRINCIPAL (MENU) ================= -->
+        <section class="janela janela-principal ativa" id="janela-menu">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <h2 class="titulo-principal">Meu portfolio<span>_</span></h2>
+
+            <div class="botoes">
+
+                <div class="menu-item">
+                    <button class="botao">
+                        <img src="user1.png" alt="Ícone Quem Sou" class="icone-botao">
+                        <span>Quem sou</span>
+                    </button>
+                    <div class="sub-menu">
+                        <button class="sub-botao" data-tela="bio">Bio & Sobre</button>
+                        <button class="sub-botao" data-tela="habilidades">Minhas Habilidades</button>
+                        <button class="sub-botao" data-tela="hobbies">Hobbies</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <button class="botao">
+                        <img src="flower.png" alt="Ícone Minhas Experiencias" class="icone-botao">
+                        <span>Minhas experiências</span>
+                    </button>
+                    <div class="sub-menu">
+                        <button class="sub-botao" data-tela="projetos-web">Projetos Web</button>
+                        <button class="sub-botao" data-tela="design-frutiger">Design Frutiger</button>
+                        <button class="sub-botao" data-tela="freelances">Freelances</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <button class="botao">
+                        <img src="flower2.png" alt="Ícone Minha carreira" class="icone-botao">
+                        <span>Minha carreira</span>
+                    </button>
+                    <div class="sub-menu">
+                        <button class="sub-botao" data-tela="formacao">Formação Acadêmica</button>
+                        <button class="sub-botao" data-tela="certificados">Certificados</button>
+                        <button class="sub-botao" data-tela="metas">Metas Futuras</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <button class="botao">
+                        <img src="clover.png" alt="Ícone Minhas Redes" class="icone-botao">
+                        <span>Minhas redes</span>
+                    </button>
+                    <div class="sub-menu">
+                        <a class="sub-botao" href="https://github.com/seu-usuario" target="_blank" rel="noopener">GitHub</a>
+                        <a class="sub-botao" href="https://linkedin.com/in/seu-usuario" target="_blank" rel="noopener">LinkedIn</a>
+                        <a class="sub-botao" href="https://instagram.com/seu-usuario" target="_blank" rel="noopener">Instagram</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= JANELAS DE CONTEÚDO =================
+             Cada uma é uma "janela" igual a principal (mesmo visual).
+             Pra criar uma nova: copie um bloco <section class="janela">,
+             troque o id, e coloque esse mesmo id no data-tela do botão. -->
+
+        <section class="janela" id="bio">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Bio & Sobre</h3>
+            <div class="corpo-janela">
+                <p>Escreva aqui sua bio. Fale um pouco sobre quem você é, o que
+                    gosta de fazer e o que te trouxe até aqui.</p>
+            </div>
+        </section>
+
+        <section class="janela" id="habilidades">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Minhas Habilidades</h3>
+            <div class="corpo-janela">
+                <ul>
+                    <li>HTML & CSS</li>
+                    <li>JavaScript</li>
+                    <li>Figma / Design</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="janela" id="hobbies">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Hobbies</h3>
+            <div class="corpo-janela">
+                <p>Conte um pouco sobre seus hobbies e interesses fora do
+                    trabalho.</p>
+            </div>
+        </section>
+
+        <section class="janela" id="projetos-web">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Projetos Web</h3>
+            <div class="corpo-janela">
+                <p>Descreva seus projetos web aqui. Pode incluir links, imagens
+                    e uma breve explicação de cada um.</p>
+            </div>
+        </section>
+
+        <section class="janela" id="design-frutiger">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Design Frutiger</h3>
+            <div class="corpo-janela">
+                <p>Fale sobre seus trabalhos de design no estilo Frutiger Aero
+                    e o que te inspira nesse estilo.</p>
+            </div>
+        </section>
+
+        <section class="janela" id="freelances">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Freelances</h3>
+            <div class="corpo-janela">
+                <p>Liste trabalhos freelance que você já realizou.</p>
+            </div>
+        </section>
+
+        <section class="janela" id="formacao">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Formação Acadêmica</h3>
+            <div class="corpo-janela">
+                <p>Conte sobre sua formação: cursos, faculdade, escola técnica
+                    etc.</p>
+            </div>
+        </section>
+
+        <section class="janela" id="certificados">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Certificados</h3>
+            <div class="corpo-janela">
+                <p>Liste seus certificados e cursos concluídos.</p>
+            </div>
+        </section>
+
+        <section class="janela" id="metas">
+            <div class="barra-titulo">
+                <span class="ponto"></span><span class="ponto"></span><span class="ponto"></span>
+            </div>
+            <button class="fechar-janela" data-fechar>&times;</button>
+            <h3 class="titulo-janela">Metas Futuras</h3>
+            <div class="corpo-janela">
+                <p>Escreva quais são seus objetivos e planos para o futuro.</p>
+            </div>
+        </section>
+
+    </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
